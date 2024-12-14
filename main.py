@@ -197,7 +197,7 @@ class TravelManager:
               self.var[2] = list(set(update_index_with_offsets(self.file, 'start_date.csv', 2)))
               self.var[3] = list(set(update_index_with_offsets(self.file, 'end_date.csv', 3)))
               self.var[4] = list(set(update_index_with_offsets(self.file, 'transport.csv', 4)))
-              return True,
+              return True, 'Good'
             else:
               return False, "Backup file not found."
 

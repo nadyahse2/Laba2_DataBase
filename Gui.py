@@ -115,7 +115,7 @@ class TravelGUI:
     def search_record(self):
         data = [entry.get() for entry in self.entries.values()]
         search_values = [item for item in data if item != '']
-        if not search_values or search_values != 1:
+        if not search_values or len(search_values) != 1:
             messagebox.showerror("Error", "Please provide at least one field for searching.")
             return
         result = self.database.search_row(*search_values)
@@ -170,13 +170,16 @@ class TravelGUI:
             messagebox.showerror("Error", f"Database file not found: {file_path}")
 
     def create_database(self):
-        self.database.delete_db()
+        if os.path.exists('travel_journal.csv'):
+            self.database.delete_db()
+            del self.database
         self.database = TravelManager()
         messagebox.showinfo("Success", "Database created successfully.")
         self.clear_entries()
 
     def delete_database(self):
         self.database.delete_db()
+        del self.database
         messagebox.showinfo("Success", "Database deleted successfully.")
         self.clear_entries()
 if __name__ == "__main__":
